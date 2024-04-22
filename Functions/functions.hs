@@ -52,9 +52,32 @@ double x = x * 2
 
 palindrome xs = reverse xs == xs
 
+--Exercises - 
+-- 1) create same function using various methods (pattern matching, if/then/else, guards)
+-- safetail - return empty list if list is empty otherwise return tail
+-- safetail function using pattern matching
+safetail :: [a] -> [a]
+safetail [] = []
+safetail (_:xs) = xs
 
+-- safetail using conditional expression
+safetail' :: [a] -> [a]
+safetail' xs = if null xs then [] else tail xs
 
+-- safetail using guards
+safetail'' :: [a] -> [a]
+safetail'' xs
+    | null xs = []
+    | otherwise = tail xs
+    
+-- 2) write 3 possible definitions that could be used for logical OR operator:
+        -- First:  False || False = False
+        --         False || True = True
+        --          True || False = True
+        --          True || True = True
 
-
-
-
+        -- Second: False || False = False
+        --          _ || _ = True
+        
+        -- Third:   False || b = b
+        --          True || _ = True
