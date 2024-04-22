@@ -21,3 +21,12 @@ Said differently:
             i.e.  (add 1) 2
     3. When you evaluate this, 1 is added to 2, resulting in 3.
 
+## More Info
+Curried functions are more flexible than functions on tuples, because useful functions can often
+be made by partially applying a curried function.
+
+    Examples of partially applied functions:
+    add 1 :: Int -> Int    --This will increment any argument by 1
+    take 5 :: [Int] -> [Int]   -- This will take any list as an argument and it will return the  first 5 items in the list
+    drop 5 :: [Int] -> [Int] -- similar to above but drops the first 5 items from the list
+
