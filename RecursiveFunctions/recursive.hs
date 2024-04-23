@@ -128,5 +128,24 @@ addTwoLists (x:xs) ys = x : addTwoLists xs ys
 --  = 1 : 2 : 3 : [4,5]
 --  = [1,2,3,4,5] 
 
+-- recursive quicksort function
+quickSort:: Ord a => [a] -> [a]
+quickSort [] = []
+quickSort (x:xs) = quickSort smaller ++ [x] ++ quickSort larger
+    where 
+        smaller = [a | a <- xs, a <= x]
+        larger = [b | b <- xs, b > x]
+
+-- walkthrough of quicksort
+-- quickSort [3, 1, 2, 5, 4]
+--  = quickSort [1,2] ++ [3] ++ quickSort [5,4]
+--  = quickSort [] ++ [1] ++ quickSort [2] ++ [3] ++ quickSort [4] ++ [5] + quickSort []
+--  = [] ++ [1] ++ quickSort [] ++ [2] ++ quickSort [] ++ [3] ++ quickSort [] ++ [4] ++ quickSort [] ++ [5] ++ []
+--  = [] ++ [1] ++ [] ++ [2] ++ [] ++ [3] ++ [] ++ [4] ++ [] ++ [5] ++ []
+--  = [1,2,3,4,5]
+
+-- combining addTwoLists and quickSort to merge and sort two lists
+mergeAndSort :: Ord a => [a] -> [a] -> [a]
+mergeAndSort x y  = quickSort (addTwoLists x y)
 
 

@@ -1,6 +1,8 @@
+-- recursive 
+
 quickSort:: Ord a => [a] -> [a]
 quickSort [] = []
-quickSort (x:xs) = quickSort ys ++ [x] ++ quickSort zs
+quickSort (x:xs) = quickSort smaller ++ [x] ++ quickSort larger
     where 
-        ys = [a | a <- xs, a <= x]
-        zs = [b | b <- xs, b > x]
+        smaller = [a | a <- xs, a <= x]
+        larger = [b | b <- xs, b > x]
