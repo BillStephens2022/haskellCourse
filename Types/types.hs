@@ -71,7 +71,9 @@ area :: Shape -> Float
 area (Circle r) = pi * r^2
 area (Rect x y) = x*y
 
-
+-- 'Maybe' Types - in cases where functions can fail, you may want to return a 'Maybe' type instead of letting program crash
+-- For example in the safediv function below, if we divide by zero, we return 'Nothing' instead of allowing the program to crash.  Returns a 'Just' value if it succeeds.
+-- similar to safediv, safehead will return a Nothing in case an empty list is passed as an argument to the function.
 -- data Maybe a = Nothing | Just a  (commented out since this is already part of Haskell standard library)
 safediv :: Int -> Int -> Maybe Int
 safediv _ 0 = Nothing
@@ -81,5 +83,31 @@ safehead :: [a] -> Maybe a
 safehead [] = Nothing
 safehead xs = Just (head xs)
 
+-- Recursive Data Types
+-- In Haskell, new types can be declared in terms of themselves
+-- Nat is a new type, with constructors Zero :: Nat and Succ :: Nat -> Nat
+-- Zero, which has no paramters, and Successor which takes Nat as a parameter
+-- 2 constructors: Zero which is a Nat, and Succ which is a function which takes an existing Nat as a parameter and returns a new Nat
+-- this is basically giving us a procedure for producing an infinite sequence of values
+-- For example, the value Succ (Succ (Succ Zero)) represents the natural number 1 + (1+ (1 + 0)) = 3
+data Nat = Zero | Succ Nat deriving (Show)
 
+nat2int :: Nat -> Int
+nat2int Zero = 0
+nat2int (Succ n) = 1 + nat2int n
+-- Example: "nat2int (Succ (Succ (Succ Zero)))" returns 3
+
+int2nat :: Int -> Nat 
+int2nat 0 = Zero
+int2nat n = Succ (int2nat (n-1))
+-- Example:  "int2nat 7" returns "Succ (Succ (Succ (Succ (Succ (Succ (Succ Zero))))))"
+
+addNat :: Nat -> Nat -> Nat
+addNat m n  = int2nat (nat2int m + nat2int n)
+-- Example: "addNat (Succ (Succ Zero)) (Succ (Succ (Succ (Succ Zero))))", which adds 2 and 4, returns Succ (Succ (Succ (Succ (Succ (Succ Zero))))), which is 6
+
+-- does same as above but defined recursively
+addNat' :: Nat -> Nat -> Nat
+addNat' Zero n = n
+addNat' (Succ m) n = Succ (addNat' m n)
 
