@@ -86,3 +86,38 @@ drop' n (_:xs) = drop' (n-1) xs
 --  = drop' 1 [3,4,5]
 --  = drop' 0 [4,5]  -- we've reached a base case and can solve!
 --  = [4,5]
+
+-- Problem 3 - Define a function that removes the last element from a non empty list
+
+-- Step 1 -- Name -- init' (named as initial segment of the list - i.e. without last item)
+-- Step 2 -- Type -- [a] -> [a]
+-- Step 3 -- Cases
+    -- note: per problem description must be non-empty list, so not using empty list as a case
+    -- init' (x:xs) | null xs = 
+    --              | otherwise = 
+-- Step 4 -- Define easy cases
+    -- init' (x:xs) | null xs = []
+-- Step 5 -- List Ingredients
+    -- init' function itself
+    -- x: 1st element of list
+    -- xs: remainder of list
+    -- Integer constants
+    -- Integer operators
+    -- List functions
+-- Step 6 - Define other cases
+    -- init' (x:xs) | otherwise = x : init' xs 
+-- Step 7 - Think about result
+    -- we could replace guards with cases with pattern matching
+
+init' :: [a] -> [a]
+init' [x] = []
+init' (x:xs) = x : init' xs
+
+-- Walkthrough of solution using example
+-- init' [1,2,3,4,5]
+--  = 1 : init' [2,3,4,5]
+--  = 1 : 2 : init' [3,4,5]
+--  = 1 : 2 : 3 : init' [4,5]
+--  = 1 : 2 : 3 : 4 : init' [5]  - we've reached a base case for the singleton!  we can solve!
+--  = 1 : 2 : 3 : 4 : []
+--  = [1,2,3,4]
