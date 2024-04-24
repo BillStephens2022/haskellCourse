@@ -111,3 +111,41 @@ addNat' :: Nat -> Nat -> Nat
 addNat' Zero n = n
 addNat' (Succ m) n = Succ (addNat' m n)
 
+-- recursive multiplication function
+multNat :: Nat -> Nat -> Nat
+multNat Zero m = Zero
+multNat (Succ n) m = addNat' (multNat n m) m  -- note: uses repeated addition (using addNat' defined above) to simulate multiplication
+
+-- Arithmetic Expressions
+-- Consider a simple form of expressions built up from integers using addition and multiplication
+-- Using recursion, a suitable new type to represent such expressions can be declared by:
+data Expr = Val Int
+    | Add Expr Expr
+    | Mul Expr Expr
+
+-- Expr has 3 constructors, one for Val, one for Add, and one for Mul
+-- Val takes one parameter of type Int
+-- Add & Mul each take 2 parameters of type Expr
+
+-- for example, the Tree, 1 + 2 * 3 would be represented as follows:
+-- Add (Val 1) (Mul (Val 2) (Val 3))
+-- now we can create 2 functions - 1) size: to give the size (based on number of number inputs), and 2) eval: to evaluate/calculate the expression
+
+-- Using recursion, it is now easy to define functions that process expressions.  For example:
+size :: Expr -> Int
+size (Val n) = 1
+size (Add x y) = size x + size y
+size (Mul x y) = size x + size y
+-- Example: "size (Add (Val 1) (Mul (Val 2) (Val 3)))" returns 3
+
+eval :: Expr -> Int
+eval (Val n) = n
+eval (Add x y) = eval x + eval y
+eval (Mul x y) = eval x * eval y
+-- Example: "eval (Add (Val 1) (Mul (Val 2) (Val 3)))" returns 7
+
+-- Binary Tree data type - using a recursive data type
+data Tree a = Leaf a
+    | Node (Tree a) (Tree a)
+
+
