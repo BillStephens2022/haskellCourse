@@ -47,3 +47,42 @@ sumList (x:xs) = x + sumList xs
     -- non-recursive version, using a fold
 sumList' :: Num a => [a] -> a 
 sumList' xs = foldr (+) 0 xs
+
+-- Problem 2 - Define a function that drops a given number of elements from the start
+-- of a list
+
+-- Step 1 -- Name -- drop'
+-- Step 2 -- Type -- drop' :: Int -> [a] -> [a]
+-- Step 3 -- Cases -- empty list, non-empty list:
+    -- drop' 0 [] =
+    -- drop' 0 (x:xs) = 
+    -- drop' n [] =
+    -- drop' n (x:xs) = 
+-- Step 4 - define easy cases:
+    -- drop' 0 [] = []
+    -- drop' 0 (x:xs) = x:xs
+    -- drop' n [] = []
+-- Step 5 -- list ingredients:
+    -- drop' function itself
+    -- n: number of items to drop from list
+    -- x: first item in list
+    -- xs: remainder of list
+    -- Integer constants
+    -- Integer operators
+    -- List functions
+-- Step 6 -- define other cases:
+    -- drop' n (x:xs) = drop' (n-1) xs
+-- Step 7 - Think about result
+   -- let's simplify/combine similar easy cases
+   -- since we don't use 'x' in the final case, we can replace x with underscore
+drop' :: Int -> [a] -> [a]
+drop' _ [] = []
+drop' 0 xs = xs
+drop' n (_:xs) = drop' (n-1) xs
+
+-- Walkthrough of solution using example
+-- drop' 3 [1,2,3,4,5]
+--  = drop' 2 [2,3,4,5]
+--  = drop' 1 [3,4,5]
+--  = drop' 0 [4,5]  -- we've reached a base case and can solve!
+--  = [4,5]
