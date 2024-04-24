@@ -110,7 +110,7 @@ drop' n (_:xs) = drop' (n-1) xs
     -- we could replace guards with cases with pattern matching
 
 init' :: [a] -> [a]
-init' [x] = []
+init' [_] = []
 init' (x:xs) = x : init' xs
 
 -- Walkthrough of solution using example
