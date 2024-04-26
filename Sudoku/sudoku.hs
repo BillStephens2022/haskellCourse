@@ -63,11 +63,10 @@ diabolical =  [".9.7..86.",
               ".2.6..35.",
               ".54..8.7."]
 
--- "unsolvable" Grid -  to be used for testing:
--- note the 1 in first column of row 1 and 2
+-- "unsolvable" Grid - more difficult than diabolical
 unsolvable :: Grid
 unsolvable = ["1..9.7..3",
-             "18.....7.",
+             ".8.....7.",
              "..9...6..",
              "..72.94..",
              "41.....95",
@@ -75,6 +74,20 @@ unsolvable = ["1..9.7..3",
              "..3...7..",
              ".5.....4.",
              "2..8.6..9"]
+
+-- extremely difficult, this is basically the minimal elements needed to have something that
+-- is solvable...  this one takes more time to solve, but it does return an answer after 
+-- several seconds
+minimal :: Grid
+minimal = [".98......",
+          "....7....",
+          "....15...",
+          "1........",
+          "...2....9",
+          "...9.6.82",
+          ".......3.",
+          "5.1......",
+          "...4...2."]
 
 -- define rows
 rows :: Matrix a -> [Row a]
