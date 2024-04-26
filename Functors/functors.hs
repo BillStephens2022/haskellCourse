@@ -30,9 +30,17 @@ map' f (x:xs) = f x : map' f xs
 -- example:  map' (^3) [2,4,6,8]  results in [8,64,216,512]
 
 -- Generalizing Further
+-- Haskell type class definition of a Functor 
+-- The Functor type class represents types that can be mapped over. It has one method, fmap, 
+-- which allows you to apply a function to every element of a functor. Here's how it's defined:
+
 -- class Functor f where
     -- fmap :: Functor f => (a -> b) -> f a -> f b
 
+-- This means any type f that wants to be an instance of Functor must provide an implementation of fmap. 
+-- For example, lists, Maybe, and various other types are instances of Functor.
+
+-- now we can take different types and make them instances of the type class Functor
 -- The List Functor
   -- instance Functor [] where
     -- fmap :: (a -> b) -> [a] -> [b]
