@@ -15,6 +15,9 @@
 -- one for 3 args, etc. i.e.
 -- class Functor2 f where
     -- fmap2 ::  (a -> b -> c) -> f a -> f b -> f c
+-- think of 'f' above as a data structure like a list or a tree. So, if f is a data structure of type
+    -- functor, it must implement the fmap2 which allows you to apply functions against it.
+    
 -- but ideally, we'd like a more general class that accepts any number of args
 
 -- pure a -> f a  --embedding a value into a data structure
