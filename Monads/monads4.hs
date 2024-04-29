@@ -1,5 +1,6 @@
 import Data.Char
 
+
 mapM' :: Monad m => (a -> m b) -> [a] -> m [b]
 mapM' f [] = return []
 mapM' f (x:xs) = do y <- f x
@@ -42,5 +43,18 @@ join' mmx = do mx <- mmx
 -- 1) Supports pure programming with effects
 -- 2) Use of monads is explicit in types
 -- 3) Can generalize functions to any effect
+
+    data Expr a = Var a
+                | Val Int
+                | Add (Expr a) (Expr a)
+
+    instance Monad Expr where
+        -- return :: a -> Expr a
+        return x = Var x
+        -- (>>=) :: Expr a -> (a -> Expr b) -> (Expr b)
+        (Var v) >>= f = f v
+        (Val n) >>= f = Val n
+        (Add x y) >>= f = Add (x >>= f)(y >>= f)
+
 
 
